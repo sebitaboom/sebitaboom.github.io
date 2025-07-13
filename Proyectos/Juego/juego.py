@@ -3,18 +3,38 @@ import parametros as p
 from time import sleep
 from personaje import Personaje
 from weapons import Weapon
+from os import listdir
+
+
+
+#Funciones
+#Escalar imagen
+def escalar_imagen(imagen: pygame.image, escala: int) -> pygame.image:
+    w = imagen.get_width()
+    h = imagen.get_height()
+    nueva_imagen = pygame.transform.scale(imagen, (w * escala, h * escala))
+    return nueva_imagen
+
+
+#Función contar elementos (recibe una carpeta y cuenta la cantidad de elementos)
+def contar_elemento(path: str) -> int:
+    return len(listdir(path))
+
+
+  
+
+#Función listar nombres elementos
+def nombres_carpetas(path: str) -> list:
+    return listdir(path)
+
+
+
 
 pygame.init()
 ventana = pygame.display.set_mode((p.ANCHO, p.ALTO))
 pygame.display.set_caption("La derrota de sebitaboom")
 
 
-#Funcion escalar imagen
-def escalar_imagen(imagen: pygame.image, escala: int) -> pygame.image:
-    w = imagen.get_width()
-    h = imagen.get_height()
-    nueva_imagen = pygame.transform.scale(imagen, (w * escala, h * escala))
-    return nueva_imagen
 
 #Importar imagenes 
 
@@ -26,6 +46,23 @@ for i in range(1, 5):
     imagen_personaje = pygame.image.load(f"assets/images/character/images/Neko-Walk-{i}.png.png")
     imagen_personaje = escalar_imagen(imagen_personaje, p.ESCALA_PERSONAJE)
     animaciones.append(imagen_personaje)
+
+#Enemigos
+path_enemigos = "assets/images/character/enemies"
+tipo_enemigos = nombres_carpetas(path_enemigos)
+animaciones_enemigos = []
+for enemigo in tipo_enemigos:
+    lista_temporal =  []
+    path_temporal = f"assets/images/character/enemies/{enemigo}"
+    numero_animaciones = contar_elemento(path_temporal)
+    for indice in range(numero_animaciones):
+        imagen_enemigo = pygame.image.load(f"{path_temporal}/{enemigo}_{indice + 1}.png")
+        imagen_enemigo = escalar_imagen(imagen_enemigo, p.ESCALA_ENEMIGO)
+        lista_temporal.append(imagen_enemigo)
+    animaciones_enemigos.append(lista_temporal)
+
+
+
 #Armas
 imagen_rifle = pygame.image.load("assets/images/weapons/Auto_Rifle-SciFi.png")
 imagen_rifle = escalar_imagen(imagen_rifle, p.ESCALA_ARMA)
@@ -38,6 +75,18 @@ imagen_balas = escalar_imagen(imagen_balas, p.ESCALA_BALAS)
 
 #Crea un jugador de la clase personaje
 jugador = Personaje(50, 50, animaciones)
+
+
+#Crea un enemigo de la clase personaje
+enemigo_micha = Personaje(500, 400, animaciones_enemigos[0])
+enemigo_sam = Personaje(600, 200, animaciones_enemigos[1])
+
+#Lista de enemigos
+lista_enemigos = []
+lista_enemigos.append(enemigo_micha)
+lista_enemigos.append(enemigo_sam)
+
+
 
 #Crea un arma de la clase Weapon
 rifle = Weapon(imagen_rifle, imagen_balas)
@@ -87,8 +136,14 @@ while run:
 
     #Mover jugador
     jugador.movimiento(delta_x, delta_y) 
+
     #Actualizar el estado del jugador
     jugador.update()
+
+    #Acutalizar el estado del enemigo
+    for enemigo in lista_enemigos:
+        enemigo.update()
+
 
     #Actualiza el estado del arma
     bala = rifle.update(jugador)
@@ -98,10 +153,14 @@ while run:
     #Hace que la bala dispara  
     for balas in grupo_balas:
         balas.update()   
-    print(grupo_balas)
+
 
     #Dibujar el jugador
     jugador.dibujar(ventana)
+
+    #Dibujar enemigos
+    for enemigo in lista_enemigos:
+        enemigo.dibujar(ventana)
 
     #Dibujar el arma
     rifle.dibujar(ventana)
