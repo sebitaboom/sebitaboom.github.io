@@ -3,8 +3,12 @@ import parametros as p
 
 
 class Personaje:
-    def __init__(self, x: int, y: int, animaciones: list) -> None: 
+    def __init__(self, x: int, y: int, animaciones: list, energia: int) -> None: 
+        #Vida del personaje
+        self.energia = energia
 
+        #Vivo o muerto
+        self.vivo = True
         #Voltear
         self.flip = False
 
@@ -24,6 +28,12 @@ class Personaje:
         self.forma.center = (x, y)
         
     def update(self) -> None:
+        if self.energia <= 0:
+            self.energia = 0
+            self.vivo = False
+
+
+
         cooldown_animacion = 150
         self.image = self.animaciones[self.frame_index]
         if pygame.time.get_ticks() - self.update_time >= cooldown_animacion:
@@ -32,6 +42,8 @@ class Personaje:
         
         if self.frame_index >= len(self.animaciones):
             self.frame_index = 0
+
+        
 
     def dibujar(self, ventana: pygame.display) -> None:
         #Voltea la imagen

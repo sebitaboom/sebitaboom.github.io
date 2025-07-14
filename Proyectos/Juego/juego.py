@@ -71,21 +71,23 @@ imagen_rifle = escalar_imagen(imagen_rifle, p.ESCALA_ARMA)
 imagen_balas = pygame.image.load("assets/images/weapons/bullets_PNG35509.png")
 imagen_balas = escalar_imagen(imagen_balas, p.ESCALA_BALAS)
 
-
-
 #Crea un jugador de la clase personaje
-jugador = Personaje(50, 50, animaciones)
+jugador = Personaje(50, 50, animaciones, 100)
 
 
 #Crea un enemigo de la clase personaje
-enemigo_micha = Personaje(500, 400, animaciones_enemigos[0])
-enemigo_sam = Personaje(600, 200, animaciones_enemigos[1])
+enemigo_micha = Personaje(400, 400, animaciones_enemigos[0], 100)
+enemigo_micha_c = Personaje(200, 150, animaciones_enemigos[1], 100)
+enemigo_sam = Personaje(600, 200, animaciones_enemigos[2], 100)
+enemigo_sam_c = Personaje(200, 300, animaciones_enemigos[3], 100)
+
 
 #Lista de enemigos
 lista_enemigos = []
 lista_enemigos.append(enemigo_micha)
 lista_enemigos.append(enemigo_sam)
-
+lista_enemigos.append(enemigo_micha_c)
+lista_enemigos.append(enemigo_sam_c)
 
 
 #Crea un arma de la clase Weapon
@@ -143,6 +145,7 @@ while run:
     #Acutalizar el estado del enemigo
     for enemigo in lista_enemigos:
         enemigo.update()
+        print(enemigo.energia) 
 
 
     #Actualiza el estado del arma
@@ -152,7 +155,8 @@ while run:
 
     #Hace que la bala dispara  
     for balas in grupo_balas:
-        balas.update()   
+        balas.update(lista_enemigos)
+         
 
 
     #Dibujar el jugador

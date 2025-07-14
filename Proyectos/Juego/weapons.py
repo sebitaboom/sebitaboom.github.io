@@ -2,6 +2,7 @@ import pygame
 import parametros as p 
 from math import (degrees, atan2, cos, radians, sin)
 from personaje import Personaje
+from random import randint
 
 #Terminar
 def max_min(angulo: float, maximo: float, minimo: float) -> float:
@@ -28,13 +29,22 @@ class Bullet(pygame.sprite.Sprite):
         self.delta_x = cos(radians(self.angulo)) * p.VELOCIDAD_BALA
         self.delta_y = - sin(radians(self.angulo)) * p.VELOCIDAD_BALA
 
-    def update(self) -> None:
+    def update(self, lista_enemigos: list) -> None:
         self.rect.x += self.delta_x
         self.rect.y += self.delta_y
 
         #Ver si las balas salieron de la pantalla
         if self.rect.right < 0 or self.rect.left > p.ANCHO or self.rect.bottom < 0 or self.rect.top > p.ALTO:
             self.kill()
+        
+        #Verificar si hay colisión con enemigos
+        for enemigo in lista_enemigos:
+            if enemigo.forma.colliderect(self.rect):
+                dano = 15 + randint(-7, 7)
+                enemigo.energia -= dano
+                self.kill()
+                break
+
 
     #Dibujar y posiciona donde sale la bala
     def dibujar(self, ventana: pygame.display) -> None:
