@@ -29,7 +29,9 @@ class Bullet(pygame.sprite.Sprite):
         self.delta_x = cos(radians(self.angulo)) * p.VELOCIDAD_BALA
         self.delta_y = - sin(radians(self.angulo)) * p.VELOCIDAD_BALA
 
-    def update(self, lista_enemigos: list) -> None:
+    def update(self, lista_enemigos: list):
+        dano = 0
+        pos_dano = None
         self.rect.x += self.delta_x
         self.rect.y += self.delta_y
 
@@ -41,9 +43,11 @@ class Bullet(pygame.sprite.Sprite):
         for enemigo in lista_enemigos:
             if enemigo.forma.colliderect(self.rect):
                 dano = 15 + randint(-7, 7)
+                pos_dano = enemigo.forma
                 enemigo.energia -= dano
                 self.kill()
                 break
+        return dano, pos_dano
 
 
     #Dibujar y posiciona donde sale la bala
@@ -87,7 +91,9 @@ class Weapon:
         mouse_posicion = pygame.mouse.get_pos()
         distancia_x = mouse_posicion[0] - self.forma.centerx
         distancia_y = -(mouse_posicion[1] - self.forma.centery)
-        self.angulo = degrees(atan2(distancia_y, distancia_x))
+
+        #Define el ángulo siguiendo al mouse
+        self.angulo = degrees(atan2(distancia_y, distancia_x)) 
 
 
  
@@ -99,6 +105,7 @@ class Weapon:
             bala =  Bullet(self.imagen_bala, self.forma.centerx, self.forma.centery, self.angulo)
             self.dispara = True
             self.ultimo_disparo = pygame.time.get_ticks()
+
         #resetear el click del mouse
         if not pygame.mouse.get_pressed()[0]:
             self.dispara = False
