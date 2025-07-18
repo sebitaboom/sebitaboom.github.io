@@ -4,6 +4,10 @@ import parametros as p
 
 class Personaje:
     def __init__(self, x: int, y: int, animaciones: list, energia: int) -> None: 
+        #Score del personaje
+        self.score = 0
+
+
         #Vida del personaje
         self.energia = energia
 
@@ -34,9 +38,9 @@ class Personaje:
 
 
 
-        cooldown_animacion = 150
+
         self.image = self.animaciones[self.frame_index]
-        if pygame.time.get_ticks() - self.update_time >= cooldown_animacion:
+        if pygame.time.get_ticks() - self.update_time >= p.COOLDOWN_ANIMACION:
             self.frame_index += 1
             self.update_time = pygame.time.get_ticks()
         

@@ -36,7 +36,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.y += self.delta_y
 
         #Ver si las balas salieron de la pantalla
-        if self.rect.right < 0 or self.rect.left > p.ANCHO or self.rect.bottom < 0 or self.rect.top > p.ALTO:
+        if self.rect.right < 0 or self.rect.left > p.ANCHO_ALTO[0] or self.rect.bottom < 0 or self.rect.top > p.ANCHO_ALTO[1]:
             self.kill()
         
         #Verificar si hay colisión con enemigos
