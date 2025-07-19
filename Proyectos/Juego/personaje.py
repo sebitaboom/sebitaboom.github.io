@@ -40,7 +40,7 @@ class Personaje:
 
 
         self.image = self.animaciones[self.frame_index]
-        if pygame.time.get_ticks() - self.update_time >= p.COOLDOWN_ANIMACION:
+        if pygame.time.get_ticks() - self.update_time >= p.COOLDOWN_ANIMACION_PERSONAJE:
             self.frame_index += 1
             self.update_time = pygame.time.get_ticks()
         

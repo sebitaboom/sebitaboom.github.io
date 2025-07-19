@@ -69,10 +69,14 @@ corazon_lleno = escalar_imagen(corazon_lleno, p.ESCALA_CORAZON)
 
 #Personajes
 animaciones = []
-for i in range(1, 5):
-    imagen_personaje = pygame.image.load(f"assets/images/character/images/Neko-Walk-{i}.png.png")
+path_personaje = "assets/images/character/images"
+numero_animaciones_personaje = contar_elemento(path_personaje)
+for i in range(numero_animaciones_personaje):
+    imagen_personaje = pygame.image.load(f"assets/images/character/images/Mago_{i + 1}.png")
     imagen_personaje = escalar_imagen(imagen_personaje, p.ESCALA_PERSONAJE)
     animaciones.append(imagen_personaje)
+    
+
 
 #Enemigos
 path_enemigos = "assets/images/character/enemies"
@@ -89,10 +93,10 @@ for enemigo in tipo_enemigos:
     animaciones_enemigos.append(lista_temporal)
 
 
-
-#Armas
-imagen_rifle = pygame.image.load("assets/images/weapons/Rifle.png")
-imagen_rifle = escalar_imagen(imagen_rifle, p.ESCALA_ARMA)
+        
+#Armas      
+imagen_Vara = pygame.image.load("assets/images/weapons/Vara.png")
+imagen_Vara = escalar_imagen(imagen_Vara, p.ESCALA_ARMA)
 
 #Balas
 imagen_balas = pygame.image.load("assets/images/weapons/Bala.png")
@@ -135,7 +139,7 @@ lista_enemigos.append(enemigo_sam_c)
 
 
 #Crea un arma de la clase Weapon
-rifle = Weapon(imagen_rifle, imagen_balas)
+Vara = Weapon(imagen_Vara, imagen_balas)
 
 
 #Grupo de sprites
@@ -196,7 +200,7 @@ while run:
 
 
     #Actualizar el estado del arma
-    bala = rifle.update(jugador)
+    bala = Vara.update(jugador)
     if bala:
         grupo_balas.add(bala)
 
@@ -221,7 +225,7 @@ while run:
         enemigo.dibujar(ventana)
 
     #Dibujar el arma
-    rifle.dibujar(ventana)
+    Vara.dibujar(ventana)
 
     #Dibujar balas
     for bala in grupo_balas:
