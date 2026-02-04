@@ -3,7 +3,8 @@ Bienvenido, este es mi repositorio. Aquí solo van a encontrar cosas que quiero 
 
 
 
-# Curriculum
+# Mi página
+No esperen mucho, apenas tiene un pato bailando.
 
 [Mi página](https://sebitaboom.github.io/)
 
@@ -12,9 +13,12 @@ No les puedo contar mucho, pero solo soy un entusiasta...
 
 # Mi proyectos
 + Juego: `En progreso...`
-+ Pagina web: `No iniciado`
++ Página web (Apuntes, Curriculum, otros ¿?): `No iniciado`
++ Página web Novia: `No iniciado`
 + Latex: `En progeso...`
-+ Tarea de mi universidad: `No iniciado`
+    + Theory Of Computation (Overleaf): `En progreso...`
++ Juego (Universidad): `No iniciado`
++ LUA (Roblox): `No iniciado`
 
 
 
