@@ -1,6 +1,12 @@
 # sebitaboom.github.io
 Bienvenido, este es mi repositorio. Aquí solo van a encontrar cosas que quiero hacer con python para masterizarme... 
 
+
+
+# Curriculum
+
+[Mi página](file:///C:/Users/sebas/Desktop/sebitaboom.github.io/index.html)
+
 # ¿Quién soy?
 No les puedo contar mucho, pero solo soy un entusiasta... 
 
@@ -9,6 +15,8 @@ No les puedo contar mucho, pero solo soy un entusiasta...
 + Pagina web: `No iniciado`
 + Latex: `En progeso...`
 + Tarea de mi universidad: `No iniciado`
+
+
 
 
 
