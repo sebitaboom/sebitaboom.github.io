@@ -5,7 +5,7 @@ Bienvenido, este es mi repositorio. Aquí solo van a encontrar cosas que quiero 
 
 # Curriculum
 
-[Mi página](file:///C:/Users/sebas/Desktop/sebitaboom.github.io/index.html)
+[Mi página](https://sebitaboom.github.io/)
 
 # ¿Quién soy?
 No les puedo contar mucho, pero solo soy un entusiasta... 
